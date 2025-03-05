@@ -1,0 +1,15 @@
+configuration {
+  show-icons:                 false;
+  font:                       "Fira Sans 11";
+  display-drun:               "Apps";
+  display-run:                "Run";
+  display-filebrowser:        "Files";
+  display-window:             "Windows";
+  drun-display-format:        "{name}";
+  window-format:              "· {t}";
+  me-select-entry:            "MousePrimary,MouseSecondary";
+  me-accept-entry:            "!MousePrimary";
+  hover-select:               true;
+}
+
+@theme "~/.config/rofi/theme.rasi"
