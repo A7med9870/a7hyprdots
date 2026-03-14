@@ -1,0 +1,5 @@
+# This directory is a Syncthing folder marker.
+# Do not delete.
+
+folderID: 3vvvl-4gcrp
+created: 2024-12-16T01:12:41+04:00
