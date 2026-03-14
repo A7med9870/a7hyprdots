@@ -1,0 +1,10 @@
+[Unit]
+Description=Sunshine Game Streaming
+
+[Service]
+ExecStart=/usr/bin/sunshine
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

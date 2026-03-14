@@ -1,0 +1,179 @@
+<layout>
+  <theme>
+    <var key="set_color" value="#cad3f5" />
+    <var key="btn_sprite_color" value="#5c5c5cff" />
+    <var key="bgcolor" value="#010206d5" />
+  </theme>
+
+  <macro
+        name="decorative_rect"
+        padding="8"
+        color="~bgcolor"
+        border="2"
+        border_color="~color_accent"
+        round="8"
+    />
+
+  <macro
+        name="LCD"
+        padding="8"
+        color="#181722d5"
+        border="1"
+        border_color="#080f2bd5"
+        round="0"
+    />
+
+  <macro
+        name="button_style"
+        padding="8"
+        border_color="~color_accent_translucent"
+        border="2"
+        round="8"
+        color="~color_accent_5"
+        color2="~color_accent_1"
+        gradient="vertical"
+        align_items="center"
+        justify_content="center"
+    />
+
+  <macro
+        name="playerBtn"
+        padding="8"
+        border_color="~color_accent_translucent"
+        border="1"
+        round="0"
+        color="#a8a8a8ff"
+        align_items="center"
+        justify_content="center"
+    />
+
+  <macro
+        name="nowPlaying_style"
+        border="0"
+        align="left"
+        flex_wrap="no_wrap"
+        flex_direction="column"
+        wrap="1"
+    />
+
+  <elements>
+    <!-- padding="32" is required there (to make room for tooltips) -->
+    <div padding="32" interactable="0" flex_direction="column" gap="8">
+      <div flex_direction="column" gap="8">
+      <rectangle
+                    macro="decorative_rect"
+                    width="350"
+                    flex_direction="column"
+                    id="norm_pane"
+                    gap="8"
+                >
+        <!-- Companion Script launch button -->
+        <div id="run_btn_div" flex_direction="row">
+          <Button
+                            width="350"
+                            border="1"
+                            border_color="#ff0000ff"
+                            id="run_btn"
+                            _press="::ShellExec $HOME/.config/wayvr/theme/gui/media.sh"
+                            _update_label="1"
+                        >
+            <label
+                                weight="normal"
+                                id="run_btn_lbl"
+                                text="Click to launch companion script"
+                            />
+          </Button>
+        </div>
+        <!-- Display Rectangle -->
+        <rectangle macro="LCD" flex_direction="row" id="display" gap="8">
+          <!-- Album Art -->
+          <div
+                            macro="nowPlaying_style"
+                            width="80"
+                            flex_direction="column"
+                            padding="1"
+                        >
+            <image
+                                id="nowPlaying_art"
+                                width="80"
+                                height="80"
+                                new_pass="1"
+                                src="/run/user/1000/albumArt"
+                            />
+          </div>
+          <!-- Now Playing Text -->
+          <div macro="nowPlaying_style" flex_direction="column" padding="1">
+            <label
+                                macro="nowPlaying_style"
+                                id="nowPlaying_artist"
+                                weight="normal"
+                                text="If you see this text"
+                            />
+            <label
+                                macro="nowPlaying_style"
+                                id="nowPlaying_title"
+                                weight="bold"
+                                text="You need to run the"
+                            />
+            <label
+                                macro="nowPlaying_style"
+                                id="nowPlaying_album"
+                                weight="normal"
+                                text="companion script. :)"
+                            />
+          </div>
+        </rectangle>
+        <div
+                        padding="2"
+                        flex_direction="column"
+                        align_items="center"
+                        interactable="0"
+                    >
+          <div
+                            padding="0"
+                            flex_direction="row"
+                            align_items="center"
+                            id="mediacontrols"
+                        >
+            <Button
+                                macro="button_style"
+                                _press="::ShellExec playerctl previous"
+                            >
+              <sprite
+                                    width="30"
+                                    height="30"
+                                    color="~set_color"
+                                    src="/usr/share/icons/breeze-dark/actions/24/media-skip-backward.svg"
+                                />
+            </Button>
+            <Button macro="button_style" _press="::ShellExec playerctl play">
+              <sprite
+                                    width="30"
+                                    height="30"
+                                    color="~set_color"
+                                    src="/usr/share/icons/breeze-dark/actions/24/media-playback-start.svg"
+                                />
+            </Button>
+            <Button macro="button_style" _press="::ShellExec playerctl pause">
+              <sprite
+                                    width="30"
+                                    height="30"
+                                    color="~set_color"
+                                    src="/usr/share/icons/breeze-dark/actions/24/media-playback-pause.svg"
+                                />
+            </Button>
+            <Button macro="button_style" _press="::ShellExec playerctl next">
+              <sprite
+                                    width="30"
+                                    height="30"
+                                    color="~set_color"
+                                    src="/usr/share/icons/breeze-dark/actions/24/media-skip-forward.svg"
+                                />
+            </Button>
+          </div>
+        </div>
+      </rectangle>
+      </div>
+    </div>
+  </elements>
+</layout>

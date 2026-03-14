@@ -1,0 +1,69 @@
+#!/bin/bash
+
+# ffmpegmp4intomp3 - Extract audio from MP4 to MP3 with metadata preservation
+
+if [ $# -eq 0 ]; then
+    echo "Usage: ffmpegmp4intomp3 /path/to/video.mp4"
+    echo "Extracts audio to MP3 while preserving metadata"
+    exit 1
+fi
+
+input_file="$1"
+
+# Check if input file exists
+if [ ! -f "$input_file" ]; then
+    echo "Error: File '$input_file' not found!"
+    exit 1
+fi
+
+# Get filename without extension
+filename=$(basename -- "$input_file")
+filename_noext="${filename%.*}"
+
+# Determine output directory (same as input)
+output_dir=$(dirname "$input_file")
+output_file="$output_dir/$filename_noext.mp3"
+
+# Store original timestamps
+original_mtime=$(stat -c %Y "$input_file")
+original_atime=$(stat -c %X "$input_file")
+
+echo "Extracting audio from: $filename"
+echo "Output: $output_file"
+
+# Extract audio with metadata preservation
+ffmpeg -i "$input_file" -i "$image_file" \
+    -map 0:a:0 -map 1:0 \
+    -c:a libmp3lame -q:a 2 \
+    -c:v copy \
+    -map_metadata 0 \
+    -id3v2_version 3 \
+    -write_id3v1 1 \
+    -metadata:s:a:0 "encoder=ffmpegmp4intomp3" \
+    -metadata:s:v title="Album cover" \
+    -metadata:s:v comment="Cover (front)" \
+    "$output_file"
+# ffmpeg -i "$input_file" \
+#     -map 0:a:0 \
+#     -c:a libmp3lame -q:a 2 \
+#     -map_metadata 0 \
+#     -id3v2_version 3 \
+#     -write_id3v1 1 \
+#     -metadata:s:a:0 "encoder=ffmpegmp4intomp3" \
+#     "$output_file"
+
+if [ $? -eq 0 ]; then
+    echo "Conversion successful: $output_file"
+
+    # Restore original timestamps
+    touch -a -d "@$original_atime" "$output_file"
+    touch -m -d "@$original_mtime" "$output_file"
+
+    # Also copy the file permissions
+    chmod --reference="$input_file" "$output_file"
+
+    echo "Timestamps and permissions restored"
+else
+    echo "Audio extraction failed!"
+    exit 1
+fi

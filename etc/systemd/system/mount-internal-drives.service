@@ -1,0 +1,13 @@
+[Unit]
+Description=Mount Internal Drives
+After=local-fs.target
+RequiresMountsFor=/run/media
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/home/ahmed/.config/hypr/mount_drives.sh
+ExecStop=/home/ahmed/.config/hypr/mount_drives.sh
+
+[Install]
+WantedBy=multi-user.target

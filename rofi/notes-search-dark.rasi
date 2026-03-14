@@ -1,0 +1,57 @@
+configuration {
+    modes: [ "dmenu" ];
+    dmenu-display-format: "{message}";
+}
+
+* {
+    /* Dark color palette */
+    background:     #282a36;  /* Background */
+    background-alt: #44475a;  /* Alternate background */
+    foreground:     #f8f8f2;  /* Text color */
+    selected:       #6272a4;  /* Selected item */
+    active:         #50fa7b;  /* Active item */
+    urgent:         #ff5555;  /* Urgent item */
+
+    /* Text */
+    font: "Fira Code 12";
+    text-color: @foreground;
+
+    /* Sizing */
+    width: 60%;
+    lines: 15;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+#inputbar {
+    children: [ prompt, entry ];
+    background: @background-alt;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#entry {
+    placeholder: "Search notes...";
+}
+
+#element {
+    padding: 8px;
+    border-bottom: 1px solid @background-alt;
+}
+
+#element selected {
+    background-color: @selected;
+    text-color: @foreground;
+}
+
+#element-text {
+    vertical-align: 0.5;
+}
+
+#message {
+    padding: 8px;
+    background-color: @background-alt;
+    border-radius: 5px;
+    margin: 5px 0;
+    border: 1px solid #6272a4;
+}

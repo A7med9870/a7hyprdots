@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# ffmpegmkvintomp4 - Convert MKV files to MP4 with metadata preservation
+
+if [ $# -eq 0 ]; then
+    echo "Usage: ffmpegmkvintomp4 /path/to/video.mkv"
+    echo "Converts MKV to MP4 while preserving metadata and timestamps"
+    exit 1
+fi
+
+input_file="$1"
+
+# Check if input file exists
+if [ ! -f "$input_file" ]; then
+    echo "Error: File '$input_file' not found!"
+    exit 1
+fi
+
+# Get filename without extension
+filename=$(basename -- "$input_file")
+filename_noext="${filename%.*}"
+
+# Determine output directory (same as input)
+output_dir=$(dirname "$input_file")
+output_file="$output_dir/$filename_noext.mp4"
+
+echo "Converting: $filename"
+echo "Output: $output_file"
+
+# Store original timestamps
+original_mtime=$(stat -c %Y "$input_file")
+original_atime=$(stat -c %X "$input_file")
+
+# Convert with metadata preservation
+ffmpeg -i "$input_file" \
+    -map 0 \
+    -c:v libx264 -crf 23 \
+    -c:a aac -b:a 192k \
+    -movflags +faststart \
+    -map_metadata 0 \
+    -map_chapters 0 \
+    -metadata:s:v:0 "encoder=ffmpegmkvintomp4" \
+    "$output_file"
+
+if [ $? -eq 0 ]; then
+    echo "Conversion successful: $output_file"
+
+    # Restore original timestamps
+    touch -a -d "@$original_atime" "$output_file"
+    touch -m -d "@$original_mtime" "$output_file"
+
+    # Also copy the file permissions
+    chmod --reference="$input_file" "$output_file"
+
+    echo "Timestamps and permissions restored"
+else
+    echo "Conversion failed!"
+    exit 1
+fi

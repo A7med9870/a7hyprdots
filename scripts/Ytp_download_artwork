@@ -1,0 +1,28 @@
+#!/bin/bash
+wlp=$(wl-paste) # make clipboard into a variable
+
+# Use command substitution to capture ffprobe output
+videolink=$(ffprobe -v quiet -show_entries format_tags=comment -of default=noprint_wrappers=1:nokey=1 "$wlp")
+
+# Only run yt-dlp if we have a valid URL from ffprobe
+
+if [[ -n "$videolink" && "$videolink" =~ ^https?:// ]]; then
+    # Get upload date from YouTube
+    echo "wlp: $wlp"
+    echo "video link: $videolink"
+    yt-dlp --skip-download --write-thumbnail --throttled-rate 100M -o "~/Music/Artworks/%(title)s.%(ext)s" "$videolink"
+    # upload_date=$(yt-dlp --print "%(upload_date)s" --no-download "$videolink" 2>/dev/null)
+
+    # if [[ -n "$upload_date" && "$upload_date" =~ ^[0-9]{8}$ ]]; then
+    #     # Format: YYYYMMDDHHMM (adding 12:00 as default time)
+    #     touch -t "${upload_date}1200" "$wlp"
+    #     echo "Set file timestamp to: ${upload_date}1200 for file: $(basename "$wlp")"
+    # else
+    #     echo "Could not retrieve valid upload date for: $videolink"
+    # fi
+else
+    echo "No YouTube URL found in file metadata"
+    echo "Comment tag contains: $videolink"
+fi
+
+# Debug output

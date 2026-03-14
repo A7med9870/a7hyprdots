@@ -5,20 +5,26 @@
   "height": 25, // Waybar height (to be removed for auto height)
   // "width": 1280, // Waybar width
   "spacing": 4, // Gaps between modules (4px)
+  // "background": transparent,
   // Choose the order of the modules
   "modules-left": [
+    "custom/rofi",
     "hyprland/workspaces",
     "hyprland/window",
     // "hyprland/mode",
     // "hyprland/scratchpad",
-    // "network",
+    "network",
     "custom/media",
   ],
   "modules-center": ["clock"],
   "modules-right": [
     // "mpd",
     // "idle_inhibitor",
+    "custom/rofi",
+    "custom/notification",
     "pulseaudio",
+    "custom/mic",
+    //"custom/audio",
     "power-profiles-daemon",
     // "cpu",
     // "memory",
@@ -28,7 +34,7 @@
     // "hyprland/language",
     "battery",
     "battery#bat2",
-    "custom/power",
+    // "custom/power",
     "tray",
   ],
   // Modules configuration
@@ -36,17 +42,14 @@
     "disable-scroll": false,
     "all-outputs": true,
     "warp-on-scroll": false,
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
     // "format": "{icon}",
     "format": "{name}: {icon}",
     "format-icons": {
       "urgent": "",
       "active": "",
       "default": "",
-      //     "1": "",
-      //     "2": "",
-      //     "3": "",
-      //     "4": "",
-      //     "5": "",
     },
   },
   "keyboard-state": {
@@ -100,6 +103,26 @@
       "activated": "",
       "deactivated": "",
     },
+  },
+  "custom/notification": {
+    "tooltip": false,
+    "format": "HUH",
+    "format-icons": {
+      "notification": "<U+F0A2><span foreground='red'><sup><U+F444></sup></span>",
+      "none": "<U+F0A2>",
+      "dnd-notification": "<U+F1F7><span foreground='red'><sup><U+F444></sup></span>",
+      "dnd-none": "<U+F1F7>",
+      "inhibited-notification": "<U+F0A2><span foreground='red'><sup><U+F444></sup></span>",
+      "inhibited-none": "<U+F0A2>",
+      "dnd-inhibited-notification": "<U+F1F7><span foreground='red'><sup><U+F444></sup></span>",
+      "dnd-inhibited-none": "<U+F1F7>",
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true,
   },
   "tray": {
     "icon-size": 24,
@@ -168,13 +191,14 @@
     "format-linked": "{ifname} (No IP) ",
     "format-disconnected": "Disconnected ⚠",
     "format-alt": "{ifname}: {ipaddr}/{cidr}",
+    "on-click": "$HOME/.config/rofi/scripts/rofi.sh $HOME/.config/rofi/scripts/wifi.sh",
   },
   "pulseaudio": {
     // "scroll-step": 1, // %, can be a float
     "format": "{volume}% {icon} {format_source}",
     "format-bluetooth": "{volume}% {icon} {format_source}",
     "format-bluetooth-muted": " {icon} {format_source}",
-    "format-muted": " {format_source}",
+    "format-muted": ":( {format_source}",
     "format-source": "{volume}% ",
     "format-source-muted": "",
     "format-icons": {
@@ -187,6 +211,39 @@
       "default": ["", "", ""],
     },
     "on-click": "pavucontrol",
+  },
+  "custom/mic": {
+    "exec": "~/.config/waybar/scripts/mic-status.sh",
+    "interval": 1,
+    "return-type": "json",
+    "on-scroll-up": "pamixer --default-source -i 1",
+    "on-scroll-down": "pamixer --default-source -d 1",
+    "on-click": "pamixer --default-source -t",
+    "on-click-right": "pavucontrol",
+  },
+
+  "custom/audio": {
+    "exec": "~/.config/waybar/scripts/audio-status.sh",
+    "interval": 1,
+    "return-type": "json",
+    "on-scroll-up": "pamixer -i 1",
+    "on-scroll-down": "pamixer -d 1",
+    "on-click": "pamixer -t",
+    "on-click-right": "pavucontrol",
+  },
+  "custom/rofi": {
+    "format": "", // Rofi icon (you can use any icon you prefer)
+    "tooltip": false, // Optional: disable tooltip
+    "on-click": "/home/ahmed/.config/hypr/rofi/scripts/roway.sh", // Command to run when clicked
+    // Optional: add on-click-right for alternative action
+    "on-click-right": "rofi -show run",
+  },
+  "custom/hyprcon": {
+    "format": "", // Rofi icon (you can use any icon you prefer)
+    "tooltip": false, // Optional: disable tooltip
+    "on-click": "/home/ahmed/.config/hypr/rofi/scripts/roway.sh", // Command to run when clicked
+    // Optional: add on-click-right for alternative action
+    "on-click-right": "rofi -show run",
   },
   "custom/media": {
     "format": "{icon} {text}",
@@ -220,48 +277,3 @@
     "on-click": "$HOME/.config/rofi/scripts/rofi.sh $HOME/.config/waybar/scripts/power-menu.sh",
   },
 }
-
-# {
-// #   "position": "top",
-// #   "modules-left": ["hyprland/workspaces"],
-// #   "modules-center": ["hyprland/window"],
-// #   "modules-right": ["network", "pulseaudio", "battery", "tray", "clock"],
-// #   "clock": {
-// #     "format": "<span foreground='#f5c2e7'>   </span>{:%a %d %H:%M}",
-// #     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-// #   },
-// #   "battery": {
-// #     "states": {
-// #       "warning": 30,
-// #       "critical": 15,
-// #     },
-// #     "format": "<span size='13000' foreground='#a6e3a1'>{icon} </span> {capacity}%",
-// #     "format-warning": "<span size='13000' foreground='#B1E3AD'>{icon} </span> {capacity}%",
-// #     "format-critical": "<span size='13000' foreground='#E38C8F'>{icon} </span> {capacity}%",
-// #     "format-charging": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
-// #     "format-plugged": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
-// #     "format-alt": "<span size='13000' foreground='#B1E3AD'>{icon} </span> {time}",
-// #     "format-full": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
-// #     "format-icons": ["", "", "", "", ""],
-// #     "tooltip-format": "{time}",
-// #   },
-// #   "network": {
-// #     "format-wifi": "<span size='13000' foreground='#f5e0dc'>  </span>{essid}",
-// #     "format-ethernet": "<span size='13000' foreground='#f5e0dc'>󰤭  </span> Disconnected",
-// #     "format-linked": "{ifname} (No IP) ",
-// #     "format-disconnected": "<span size='13000' foreground='#f5e0dc'>  </span>Disconnected",
-// #     "tooltip-format-wifi": "Signal Strenght: {signalStrength}%",
-// #   },
-// #   "tray": {
-// #     "icon-size": 21,
-// #     "spacing": 10,
-// #   },
-// #   "pulseaudio": {
-// #     "format": "{icon}  {volume}%",
-// #     "format-muted": "",
-// #     "format-icons": {
-// #       "default": ["", "", " "],
-// #     },
-// #     "on-click": "pavucontrol",
-// #   },
-// # }

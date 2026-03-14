@@ -1,0 +1,346 @@
+{
+  "sets": [
+    {
+      "name": "",
+      "overlays": {
+        "kbd": {
+          "alpha": 1.0,
+          "grabbable": true,
+          "interactable": true,
+          "positioning": "Anchored",
+          "curvature": 0.14999999,
+          "additive": false,
+          "saved_transform": null
+        },
+        "M-1": {
+          "alpha": 1.0,
+          "grabbable": false,
+          "interactable": false,
+          "positioning": {
+            "FollowHead": {
+              "lerp": 1.0
+            }
+          },
+          "curvature": 0.14999999,
+          "additive": false,
+          "saved_transform": [
+            0.99573964,
+            0.086956576,
+            0.030160144,
+            -0.08888261,
+            0.9935756,
+            0.06982705,
+            -0.023894837,
+            -0.072211474,
+            0.9970872,
+            0.034805257,
+            0.11207843,
+            -1.4773703
+          ]
+        },
+        "DP-1": {
+          "alpha": 1.0,
+          "grabbable": true,
+          "interactable": true,
+          "positioning": "Anchored",
+          "curvature": 0.14999999,
+          "additive": false,
+          "saved_transform": null
+        },
+        "media": {
+          "alpha": 1.0,
+          "grabbable": true,
+          "interactable": true,
+          "positioning": "Floating",
+          "curvature": null,
+          "additive": false,
+          "saved_transform": [
+            0.48669463,
+            -0.04348451,
+            -0.17042108,
+            -0.015296887,
+            0.48906833,
+            -0.16847569,
+            0.1752149,
+            0.16348441,
+            0.45867038,
+            -0.52154464,
+            -0.48623574,
+            -1.3642163
+          ]
+        }
+      },
+      "hidden_overlays": {
+        "DP-1": {
+          "alpha": 1.0,
+          "grabbable": true,
+          "interactable": true,
+          "positioning": "Anchored",
+          "curvature": 0.15,
+          "additive": false,
+          "saved_transform": null
+        },
+        "M-2": {
+          "alpha": 1.0,
+          "grabbable": false,
+          "interactable": true,
+          "positioning": {
+            "FollowHand": {
+              "hand": "Left",
+              "lerp": 1.0,
+              "align_to_hmd": false
+            }
+          },
+          "curvature": null,
+          "additive": false,
+          "saved_transform": [
+            0.14859033,
+            -0.09435045,
+            -0.12282587,
+            -0.08573051,
+            -0.19186118,
+            0.043667264,
+            -0.12899023,
+            0.018829312,
+            -0.17051174,
+            -0.18642706,
+            -0.050773174,
+            0.34213406
+          ]
+        }
+      }
+    },
+    {
+      "name": "",
+      "overlays": {
+        "DP-1": {
+          "alpha": 1.0,
+          "grabbable": false,
+          "interactable": true,
+          "positioning": {
+            "FollowHead": {
+              "lerp": 0.15
+            }
+          },
+          "curvature": null,
+          "additive": false,
+          "saved_transform": [
+            1.495709,
+            0.11136344,
+            -0.021339208,
+            -0.111741774,
+            1.4955864,
+            -0.027157038,
+            0.019260183,
+            0.02866903,
+            1.4996032,
+            -0.015099987,
+            -0.02504921,
+            -1.4276602
+          ]
+        },
+        "media": {
+          "alpha": 1.0,
+          "grabbable": false,
+          "interactable": true,
+          "positioning": {
+            "FollowHand": {
+              "hand": "Left",
+              "lerp": 1.0,
+              "align_to_hmd": true
+            }
+          },
+          "curvature": null,
+          "additive": false,
+          "saved_transform": [
+            -0.1464303,
+            0.19441976,
+            -0.45668977,
+            -0.37233025,
+            -0.3578952,
+            -0.032979667,
+            -0.32822973,
+            0.31924665,
+            0.24114984,
+            -0.11965382,
+            -0.26046914,
+            0.091319785
+          ]
+        },
+        "kbd": {
+          "alpha": 1.0,
+          "grabbable": true,
+          "interactable": true,
+          "positioning": "Anchored",
+          "curvature": 0.03,
+          "additive": false,
+          "saved_transform": [
+            1.1470127,
+            -0.0044770218,
+            -0.082714505,
+            -0.036150932,
+            1.0061387,
+            -0.5557681,
+            0.07453082,
+            0.55692464,
+            1.0033841,
+            -0.091577865,
+            -0.5675577,
+            -0.13075018
+          ]
+        },
+        "M-1": {
+          "alpha": 1.0,
+          "grabbable": true,
+          "interactable": true,
+          "positioning": {
+            "FollowHand": {
+              "hand": "Right",
+              "lerp": 1.0,
+              "align_to_hmd": true
+            }
+          },
+          "curvature": 0.15,
+          "additive": false,
+          "saved_transform": [
+            -0.07094764,
+            0.0873656,
+            0.29452655,
+            0.29312566,
+            -0.07122871,
+            0.091738805,
+            0.09195638,
+            0.29445875,
+            -0.06519438,
+            0.13996994,
+            -0.058781788,
+            0.16437581
+          ]
+        }
+      },
+      "hidden_overlays": {
+        "DP-1": {
+          "alpha": 1.0,
+          "grabbable": true,
+          "interactable": true,
+          "positioning": "Anchored",
+          "curvature": 0.15,
+          "additive": false,
+          "saved_transform": null
+        },
+        "media": {
+          "alpha": 1.0,
+          "grabbable": true,
+          "interactable": true,
+          "positioning": "Floating",
+          "curvature": null,
+          "additive": false,
+          "saved_transform": null
+        },
+        "M-1": {
+          "alpha": 1.0,
+          "grabbable": true,
+          "interactable": true,
+          "positioning": "Floating",
+          "curvature": 0.15,
+          "additive": false,
+          "saved_transform": null
+        }
+      }
+    }
+  ],
+  "global_set": {
+    "watch": {
+      "alpha": 0.40775788,
+      "grabbable": true,
+      "interactable": true,
+      "positioning": {
+        "FollowHand": {
+          "hand": "Left",
+          "lerp": 1.0,
+          "align_to_hmd": false
+        }
+      },
+      "curvature": null,
+      "additive": false,
+      "saved_transform": [
+        -0.0100477375,
+        -0.00875514,
+        -0.114224255,
+        -0.03403821,
+        -0.10925628,
+        0.011368532,
+        -0.109385684,
+        0.034802165,
+        0.0069545656,
+        -0.08120912,
+        -0.06937522,
+        0.07206917
+      ]
+    }
+  },
+  "last_set": 1,
+  "attribs": [
+    [
+      "M-2",
+      [
+        {
+          "Stereo": "None"
+        },
+        {
+          "MouseTransform": "Default"
+        }
+      ]
+    ],
+    [
+      "toast",
+      []
+    ],
+    [
+      "DP-1",
+      [
+        {
+          "Stereo": "None"
+        },
+        {
+          "MouseTransform": "Default"
+        }
+      ]
+    ],
+    [
+      "kbd",
+      []
+    ],
+    [
+      "anchor",
+      []
+    ],
+    [
+      "watch",
+      []
+    ],
+    [
+      "Dashboard",
+      []
+    ],
+    [
+      "grab-help",
+      []
+    ],
+    [
+      "media",
+      []
+    ],
+    [
+      "M-1",
+      [
+        {
+          "Stereo": "None"
+        },
+        {
+          "MouseTransform": "Default"
+        }
+      ]
+    ]
+  ]
+}

@@ -1,0 +1,48 @@
+configuration {
+    modes: [ "dmenu" ];
+    dmenu-display-format: "{message}";
+}
+
+* {
+    /* Colors */
+    background:     #1e1e2e;
+    background-alt: #585b70;
+    foreground:     #cdd6f4;
+    selected:       #f5e0dc;
+    active:         #a6e3a1;
+    urgent:         #f38ba8;
+
+    /* Text */
+    font: "JetBrains Mono 12";
+    text-color: @foreground;
+
+    /* Sizing */
+    width: 60%;
+    lines: 15;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+#inputbar {
+    children: [ prompt, entry ];
+}
+
+#element {
+    padding: 8px;
+}
+
+#element selected {
+    background-color: @selected;
+    text-color: @background;
+}
+
+#element-text {
+    vertical-align: 0.5;
+}
+
+#message {
+    padding: 8px;
+    background-color: @background-alt;
+    border-radius: 5px;
+    margin: 5px 0;
+}

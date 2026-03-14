@@ -1,0 +1,33 @@
+[Added Associations]
+application/x-kdeuser1=dev.zed.Zed.desktop;org.kde.kate.desktop;
+audio/mpeg=mpv.desktop;vlc.desktop;org.kde.kid3.desktop;
+image/jpeg=okularApplication_kimgio.desktop;krita_jpeg.desktop;org.ksnip.ksnip.desktop;
+image/png=okularApplication_kimgio.desktop;krita_png.desktop;org.ksnip.ksnip.desktop;gmic_qt.desktop;
+image/webp=okularApplication_kimgio.desktop;
+text/markdown=org.kde.kate.desktop;dev.zed.Zed.desktop;okularApplication_md.desktop;libreoffice-writer.desktop;micro.desktop;okularApplication_txt.desktop;org.kde.kwrite.desktop;nvim.desktop;
+video/mp4=mpv.desktop;vlc.desktop;
+video/webm=mpv.desktop;vlc.desktop;
+video/x-matroska=mpv.desktop;vlc.desktop;
+x-scheme-handler/gale=gale-handler.desktop;
+x-scheme-handler/ror2mm=gale-handler.desktop;
+
+[Default Applications]
+application/x-kdeuser1=dev.zed.Zed.desktop;
+audio/mpeg=mpv.desktop;
+image/jpeg=okularApplication_kimgio.desktop;
+image/png=okularApplication_kimgio.desktop;
+image/webp=okularApplication_kimgio.desktop;
+text/markdown=nvim.desktop
+text/plain=dev.zed.Zed.desktop
+video/mp4=mpv.desktop;
+video/webm=mpv.desktop;
+video/x-matroska=mpv.desktop;
+x-scheme-handler/gale=gale-handler.desktop
+x-scheme-handler/http=librewolf.desktop;
+x-scheme-handler/https=librewolf.desktop;
+x-scheme-handler/postman=Postman.desktop
+x-scheme-handler/ror2mm=gale-handler.desktop
+x-scheme-handler/obsidian=obsidian.desktop
+
+[Removed Associations]
+image/webp=krita_qimageio.desktop;

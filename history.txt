@@ -1,0 +1,931 @@
+protoc --decode_raw < gamerecording.pb > decoded_output.txt
+hexdump -C gamerecording.pb | head -100
+ffprobe gamerecording.pb
+protoc --decode_raw < gamerecording.pb | head -100
+ls -lh gamerecording.pb
+file gamerecording.pb
+/run/media/ahmed/drivec/Sync_W11/Steam_rec/script_20251204_161132.py
+chmod +x ./*
+ls
+cd protobuf-inspector
+git clone https://github.com/mildsunrise/protobuf-inspector.git
+yay -S protobuf
+sudo pacman -S protobuf-compiler
+sbrct /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_2807960_20251125_121946/
+mpv ./session.mpd
+~/.config/hypr/rofi/script_from_clipboard.sh
+/home/ahmed/.config/hypr/copy_full_dir.sh
+xdg-open /home/ahmed/Documents/obsi/Hypr/2025_12_04_Configs_v3.md
+/home/ahmed/.config/hypr/scripts/Backup_files_withoutrsyncv1.sh
+randompvid
+# Create a backup folder
+mkdir -p ~/dolphin-backup
+
+# Copy all relevant files
+cp ~/.config/dolphinrc ~/dolphin-backup/
+cp ~/.local/share/user-places.xbel ~/dolphin-backup/
+cp ~/.config/user-dirs.dirs ~/dolphin-backup/
+cp ~/.local/share/kio/bookmarks.xml ~/dolphin-backup/ 2>/dev/null || true
+
+# Backup service menus if they exist
+[ -d ~/.local/share/kservices5/ServiceMenus ] && \
+cp -r ~/.local/share/kservices5/ServiceMenus ~/dolphin-backup/
+
+# Create a compressed backup
+tar -czf dolphin-settings-backup.tar.gz -C ~/dolphin-backup .
+dolphin ~/.local/share/kservices5/ServiceMenus/
+zeditor ~/.local/share/kio/bookmarks.xml
+zeditor ~/.config/user-dirs.dirs
+zeditor ~/.local/share/user-places.xbel
+xdg-open ~/.local/share/user-places.xbel
+xdg-open history.txt
+history > history.txt
+find /home/ahmed/Documents/BlenderProjects/videos/ -name "*.mp4" -type f -exec sh -c '
+  for file; do
+    # Get base filename without .mp4 extension
+    basename=$(basename "$file" .mp4)
+    
+    # Remove "Video by " prefix if present
+    username="${basename#"Video by "}"
+    
+    date=$(stat -c %y "$file" | cut -d" " -f1)
+    new_name="${username}_${date}.mp4"
+    
+    # Check if file already has correct name format
+    # Pattern: username_YYYY-MM-DD.mp4
+    if [[ "$(basename "$file")" =~ ^[^_]+_[0-9]{4}-[0-9]{2}-[0-9]{2}\.mp4$ ]]; then
+      echo "Skipping (already correct format): $file"
+      continue
+    fi
+    
+    # Also check if the file would be renamed to itself
+    if [ "$(basename "$file")" = "$new_name" ]; then
+      echo "Skipping (already named correctly): $file"
+      continue
+    fi
+    
+    echo "Renaming: $(basename "$file") -> $new_name"
+    mv "$file" "$(dirname "$file")/$new_name"
+  done
+' sh {} +
+find /home/ahmed/Downloads/instadcopy/ -name "*.mp4" -type f -exec sh -c '
+  for file; do
+    # Get base filename without .mp4 extension
+    basename=$(basename "$file" .mp4)
+    
+    # Remove "Video by " prefix if present
+    username="${basename#"Video by "}"
+    
+    date=$(stat -c %y "$file" | cut -d" " -f1)
+    new_name="${username}_${date}.mp4"
+    
+    # Check if file already has correct name format
+    # Pattern: username_YYYY-MM-DD.mp4
+    if [[ "$(basename "$file")" =~ ^[^_]+_[0-9]{4}-[0-9]{2}-[0-9]{2}\.mp4$ ]]; then
+      echo "Skipping (already correct format): $file"
+      continue
+    fi
+    
+    # Also check if the file would be renamed to itself
+    if [ "$(basename "$file")" = "$new_name" ]; then
+      echo "Skipping (already named correctly): $file"
+      continue
+    fi
+    
+    echo "Renaming: $(basename "$file") -> $new_name"
+    mv "$file" "$(dirname "$file")/$new_name"
+  done
+' sh {} +
+find /home/ahmed/Downloads/insta/ -name "*.mp4" -type f -exec sh -c '
+  for file; do
+    # Get base filename without .mp4 extension
+    basename=$(basename "$file" .mp4)
+    
+    # Remove "Video by " prefix if present
+    username="${basename#"Video by "}"
+    
+    date=$(stat -c %y "$file" | cut -d" " -f1)
+    new_name="${username}_${date}.mp4"
+    
+    # Check if file already has correct name format
+    # Pattern: username_YYYY-MM-DD.mp4
+    if [[ "$(basename "$file")" =~ ^[^_]+_[0-9]{4}-[0-9]{2}-[0-9]{2}\.mp4$ ]]; then
+      echo "Skipping (already correct format): $file"
+      continue
+    fi
+    
+    # Also check if the file would be renamed to itself
+    if [ "$(basename "$file")" = "$new_name" ]; then
+      echo "Skipping (already named correctly): $file"
+      continue
+    fi
+    
+    echo "Renaming: $(basename "$file") -> $new_name"
+    mv "$file" "$(dirname "$file")/$new_name"
+  done
+' sh {} +
+find /home/ahmed/Downloads/insta/ -name "*.mp4" -type f -exec sh -c '
+  for file; do
+    # Get base filename without .mp4 extension
+    basename=$(basename "$file" .mp4)
+    
+    # Remove "Video by " prefix if present
+    # This will handle cases with or without the prefix
+    username="${basename#"Video by "}"
+    
+    date=$(stat -c %y "$file" | cut -d" " -f1)
+    mv "$file" "$(dirname "$file")/${username}_${date}.mp4"
+  done
+' sh {} +
+find /home/ahmed/Downloads/insta/ -name "*.mp4" -type f -exec sh -c '
+  for file; do
+    basename=$(basename "$file" .mp4)
+    username=$(echo "$basename" | cut -d"_" -f1)
+    date=$(stat -c %y "$file" | cut -d" " -f1)
+    mv "$file" "$(dirname "$file")/${username}_${date}.mp4"
+  done
+' sh {} +
+find /home/ahmed/Downloads/insta/ -name "*.mp4" -type f -exec sh -c '
+  for file; do
+    username=""
+    date=$(stat -c %y "$file" | cut -d" " -f1)
+    mv "$file" "$(dirname "$file")/${username}_${date}.mp4"
+  done
+' sh {} +
+/home/ahmed/.config/hypr/scripts/STEAM_BACKGROUND_RECORDING/SB_TL_TN_batch_timefix.sh
+/home/ahmed/.config/hypr/scripts/STEAM_BACKGROUND_RECORDING/SB_TL_TN_batch.sh
+/home/ahmed/.config/hypr/scripts/STEAM_BACKGROUND_RECORDING/SB_timeline_thumbnails.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_122949020251203_075733.json
+tree
+sbrct /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_1229490_20251129_222913/timelines/timeline_122949020251129_222913.json
+env -u SDL_VIDEODRIVER steam
+ffmpeg -i /home/ahmed/Videos/converted/recorded_20251129_215423_cut_1.mp4 \
+  -c copy \
+  -f dash \
+  -seg_duration 2 \
+  -use_template 1 \
+  -use_timeline 1 \
+  -init_seg_name "init-stream\$RepresentationID\$.m4s" \
+  -media_seg_name "chunk-stream\$RepresentationID\$-\$Number%05d\$.m4s" \
+  /home/ahmed/Videos/converted/output/session.mpd
+date -r /home/ahmed/Videos/converted/recorded_20251129_215423_cut.mp4 "+%Y%m%d_%H%M%S"
+stat -c %y /home/ahmed/Videos/converted/recorded_20251129_215423_cut.mp4
+ffmpeg -y -i session.mpd -ss 00:00:01 -vframes 1 -q:v 2 "thumbnail.jpg" 2>/dev/null || touch "thumbnail.jpg"
+ffmpeg -i /home/ahmed/Videos/converted/recorded_20251202_123655.mp4 \
+  -c copy \
+  -f dash \
+  -seg_duration 2 \
+  -use_template 1 \
+  -use_timeline 1 \
+  -init_seg_name "init-stream\$RepresentationID\$.m4s" \
+  -media_seg_name "chunk-stream\$RepresentationID\$-\$Number%05d\$.m4s" \
+  /home/ahmed/Videos/converted/output/session.mpd
+sbrct /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_14160159724976209920_20251202_123655/
+ffmpeg -y -i session.mpd -ss 00:00:01 -vframes 1 -q:v 2 "/home/ahmed/Videos/converted/thumbnail.jpg" 2>/dev/null || touch "/home/ahmed/Videos/converted/thumbnail.jpg"
+sbrct /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1229490_20250921_202630/
+ffmpeg -i /home/ahmed/Videos/converted/recorded_20251202_201719.mp4 \
+  -c copy \
+  -f dash \
+  -seg_duration 2 \
+  -use_template 1 \
+  -use_timeline 1 \
+  -init_seg_name "init-stream\$RepresentationID\$.m4s" \
+  -media_seg_name "chunk-stream\$RepresentationID\$-\$Number%05d\$.m4s" \
+  /home/ahmed/Videos/converted/output/session.mpd
+ffmpeg -i /home/ahmed/Videos/converted/recorded_20251202_201719.mp4 \
+  -c copy \
+  -f dash \
+  -seg_duration 2 \
+  -use_template 1 \
+  -use_timeline 1 \
+  -init_seg_name "init-stream\$RepresentationID\$.m4s" \
+  -media_seg_name "chunk-stream\$RepresentationID\$-\$Number%05d\$.m4s" \
+  output_folder/session.mpd
+cd /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_1451940_20251123_235208/video/bg_1451940_20251118_200611_0/
+yazi
+y
+cd /home/ahmed/.config/hypr/scripts/STEAM_BACKGROUND_RECORDING/
+/home/ahmed/.config/hypr/scripts/STEAM_BACKGROUND_RECORDING/SB_reverse_clip.sh /home/ahmed/Videos/converted/recorded_20251030_190532.mp4 /home/ahmed/Videos/test/
+sudo pacman -S gpac
+sudo pacman -S MP4Box
+mpv "/home/ahmed/Videos/test//video/bg_clip_1764711549074_20251203_013909_0/session.mpd"
+sudo pacman -S bc
+cd /home/ahmed/Videos/test/
+cd
+/home/ahmed/.config/hypr/scripts/STEAM_BACKGROUND_RECORDING/SB_reverse_clip.sh /home/ahmed/Videos/converted/recorded_20251030_190532.mp4 /home/ahmed/Videos/
+/home/ahmed/.config/hypr/scripts/STEAM_BACKGROUND_RECORDING/SB_reverse_clip.sh /home/ahmed/Videos/converted/recorded_20251030_190532.mp4 /home/ahmed/Videos/test
+mpv ./video.mpd
+mv /home/ahmed/Videos/converted/sadfzf.sh /home/ahmed/.config/hypr/scripts/STEAM_BACKGROUND_RECORDING/SB_closest_timelineinto_bg.sh
+xdg-open /home/ahmed/Videos/converted/clip_1451940_20251123_235208.mp4
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_1451940_20251123_235208/
+cutvid /home/ahmed/Videos/converted/recorded_20251129_215423.mp4 00:34:50 00:35:45
+cutvid /home/ahmed/Videos/converted/recorded_20251129_215423.mp4 00:34:50 00:35:50
+/home/ahmed/Videos/converted/sadfzf.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_58132020251202_201654.json
+Sbmp4 "/run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_581320_20251202_201719/" "/run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_58132020251202_201654.json"
+/home/ahmed/Videos/converted/sadfzf.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_1510347590343642316820251202_122834.json
+xdg-open /home/ahmed/Videos/converted/recorded_20251125_195838.mp4
+/home/ahmed/Videos/converted/sadfzf.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_145194020251125_195818.json
+/home/ahmed/Videos/converted/sad.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_145194020251125_195818.json
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1229490_20251201_145750 /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_122949020251201_145733.json
+/home/ahmed/Videos/converted/sad.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_122949020251201_145733.json
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1229490_20251002_215547 /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_122949020250706_210556.json
+/home/ahmed/Videos/converted/sad.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_122949020250706_210556.json
+/home/ahmed/Videos/converted/sad.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_122949020250719_122013.json
+/home/ahmed/Videos/converted/sad.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_122949020250707_201423.json
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1451940_20251125_195838 /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_145194020251125_195818.json
+/home/ahmed/Videos/converted/sad.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_145194020251123_195202.json
+/home/ahmed/Videos/converted/sad.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_145194020251119_202006.json
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1451940_20251118_201907 /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/145194020251118_203507.json
+/home/ahmed/Videos/converted/sad.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/145194020251118_203507.json
+/home/ahmed/Videos/converted/sad.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_145194020251118_203507.json
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1451940_20251118_201907 /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_145194020251118_203507.json
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1451940_20251126_120107 /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_145194020251126_120049.json
+/home/ahmed/Videos/converted/sad.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_145194020251126_120049.json
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1451940_20251126_180118 /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_145194020251118_203507.json
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1451940_20251126_180118 /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_145194020251125_195818.json
+xdg-open /home/ahmed/Videos/converted/recorded_20251126_180118.mp4
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1451940_20251126_180118 /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines//run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_145194020251125_195818.json
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1451940_20251126_180118/ -300 /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_145194020251125_195818.json
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1451940_20251126_180118/ -300 /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_145194020251123_195202.json
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1451940_20251126_180118/ -300 /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_145194020251119_202006.json
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1451940_20251126_180118/ -300 /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_145194020251118_203507.json
+/home/ahmed/Videos/converted/sad.sh
+touch sad.sh
+find /run/media/ahmed/drivec/Sync_W11/Steam_rec/video -type d -name "*1451940*20251126*1038*"
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1451940_20251126_103827/ -300 /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_145194020251126_103807.json
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1451940_20251126_103827/ -300
+SBCV /home/ahmed/Videos/converted/recorded_20251129_215423.mp4
+ln -sf /home/ahmed/.config/hypr/scripts/STEAM_BACKGROUND_RECORDING/SBCompressvid.sh /home/ahmed/.local/bin/SBCV
+git reset --hard HEAD && git pull origin main
+git pull
+./blender
+sudo pacman -S whereami
+btop
+mpv "$(wl-paste)"
+flatpak update io.github.wivrn.wivrn
+flatpak list
+systemctl enable --now avahi-daemon
+adb install /home/ahmed/Downloads/WiVRn-standard-release.apk
+adb devices
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1229490_20251129_215423/ -300
+python3 dump_vdf.py ~/.steam/steam/userdata/418183881/config/shortcuts.vdf ./shortcuts.json
+rsync -aHL --checksum --progress /home/ahmed/linkstobackup/ /run/media/ahmed/Ahmed/extrenalsyslinks/ && rsync -aHL --checksum --progress /home/ahmed/linkstobackup/ /run/media/ahmed/drivec/extrenalsyslinks/ && shutdown -h now
+micro history.txt
+history
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1451940_20251118_190432/ -300
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1451940_20251126_180118/ -300
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1608640_20251129_123533/ -300
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1608640_20251128_221353/ -300
+ffmpeg -y -i "input.mp4" -i "input2.mp4" -filter_complex "[0:v]scale=256x256,fps=30[0_scaled];[1:v]scale=256x256,fps=30[1_scaled];[0_scaled][1_scaled]xfade=transition=fade:duration=2.5[merged];[0:a][1:a]acrossfade=duration=2.5[merged_audio]" -map "[merged]" -map "[merged_audio]" -c:v libx264 -x264-params keyint=5000:keyint_min=5000 -bsf:v noise=amount=3000 -c:a aac -pix_fmt yuv420p "corrupted_vid.mp4"
+ffmpeg -y -i "input.mp4" -i "input2.mp4" -filter_complex "[0:v]scale=256x256,fps=30,setpts=PTS-STARTPTS[0_scaled];[1:v]scale=256x256,fps=30,setpts=PTS-STARTPTS[1_scaled];[0_scaled][1_scaled]xfade=transition=fade:duration=2.5[merged]" -map "[merged]" -c:v libx264 -x264-params keyint=5000:keyint_min=5000 -bsf:v noise=amount=3000 -pix_fmt yuv420p "corrupted_vid.mp4"
+ffmpeg -y -i "input.mp4" -i "input2.mp4" -filter_complex "[0:v]scale=256x256,fps=30[0_scaled];[1:v]scale=256x256,fps=30[1_scaled];[0_scaled][1_scaled]xfade=transition=fade:duration=2.5:offset=5[merged];[0:a][1:a]acrossfade=duration=2.5[merged_audio]" -map "[merged]" -map "[merged_audio]" -c:v libx264 -x264-params keyint=5000:keyint_min=5000 -bsf:v noise=amount=3000 -c:a aac -pix_fmt yuv420p "corrupted_vid.mp4"
+ffmpeg -y -i "input.mp4" -i "input2.mp4" -filter_complex "[0:v]scale=256x256,fps=30[0_scaled];[1:v]scale=256x256,fps=30[1_scaled];[0_scaled][1_scaled]xfade=transition=fade:duration=2.5:offset=5,noise=alls=80:allf=t+u[merged]" -map "[merged]" -c:v libx264 -x264-params keyint=5000:keyint_min=5000 -pix_fmt yuv420p "corrupted_vid.mp4" && ffmpeg -y -i "corrupted_vid.mp4" "glitched_viewable.mp4"
+ffmpeg -y -i "input.mp4" -i "input2.mp4" -filter_complex "[0:v]scale=256x256,fps=30[0_scaled];[1:v]scale=256x256,fps=30[1_scaled];[0_scaled][1_scaled]xfade=transition=fade:duration=2.5:offset=5[merged]" -map "[merged]" -c:v libx264 -x264-params keyint=5000:keyint_min=5000 -bsf:v noise=amount=3000 -pix_fmt yuv420p "corrupted_vid.mp4" && ffmpeg -y -i "corrupted_vid.mp4" "glitched_viewable.mp4"
+ffmpeg -y -i "input.mp4" -i "input2.mp4" -filter_complex "[0:v]scale=256x256,fps=30[0_scaled];[1:v]scale=256x256,fps=30[1_scaled];[0_scaled][1_scaled]xfade=transition=fade:duration=2.5:offset=5[merged]" -map "[merged]" -c:v libx264 -x264-params keyint=5000:keyint_min=5000 -bsf:v "noise=amount='if(between(t,5,10),3000,11000)'" -pix_fmt yuv420p "corrupted_vid.mp4" && ffmpeg -y -i "corrupted_vid.mp4" "glitched_viewable.mp4"
+ffmpeg -y -i "input.mp4" -i "input2.mp4" -filter_complex "[0:v]scale=256x256,fps=30[0_scaled];[1:v]scale=256x256,fps=30[1_scaled];[0_scaled][1_scaled]xfade=transition=fade:duration=2.5:offset=5[merged]" -map "[merged]" -c:v libx264 -x264-params keyint=5000:keyint_min=5000 -bsf:v "noise=amount='if(between(t\,5\,10),3000,11000)'" -pix_fmt yuv420p "corrupted_vid.mp4" && ffmpeg -y -i "corrupted_vid.mp4" "glitched_viewable.mp4"
+ffmpeg -y -i -flags output_corrput -i "input.mp4" - "input2.mp4" -filter_complex "[0:v]scale=256x256[0],[0]fps=30[0],[1:v]scale=256x256[1],[1]fps=30[1],[0][1]xfade=transition=fade:duration=2.5:offset=5" -c:v libx264 -x264-params keyint=5000:keyint_min=5000 -bsf:v "noise=amount='if(between(tb*n\,5\,10),3000,11000)" -pix_fmt yuv420p "corrupted_vid.mp4" && ffmpeg -y -i "corrupted_vid.mp4" "glitched_viewable.mp4"
+ffmpeg -y -i /home/ahmed/input.mp4 -vf scale=64x64 -c:v libx264 -qp 40 output.mp4 && ffmpeg -y -i output.mp4 -vf scale=512x512 -c:v h264_nvenc outputvid_res.mp4
+ffmpeg -y -i /home/ahmed/input.mp4 -vf scale=64x128 -c:v h264_nvenc -qp 40 output.mp4 && ffmpeg -y -i output.mp4 -vf scale=512x1024 -c:v h264_nvenc outputvid_res.mp4
+ffmpeg -y -i /home/ahmed/input.mp4 -vf scale=64x64 -c:v libx264 -qp 40 output.mp4 && ffmpeg -y -i output.mp4 -vf scale=512x512 -c:v libx264 outputvid_res.mp4
+ffmpeg -y -i /home/ahmed/input.mp4 -vf scale=128x128 -c:v h264_nvenc -qp 40 output.mp4 && ffmpeg -y -i output.mp4 -vf scale=512x512 -c:v h264_nvenc outputvid_res.mp4
+ffmpeg -y -i /home/ahmed/input.mp4 -vf scale=64x64 -c:v h264_nvenc -qp 40 output.mp4 && ffmpeg -y -i output.mp4 -vf scale=512x512 -c:v h264_nvenc outputvid_res.mp4
+ffmpeg -y -i /home/ahmed/input.mp4 -vf scale=64x64 -c:v h264_nvenc -preset fast -rc constqp -qp 40 output.mp4 && ffmpeg -y -i output.mp4 -vf scale=512x512 -c:v h264_nvenc -preset fast outputvid_res.mp4
+ffmpeg -y -i /home/ahmed/input.mp4 -c:v h264_nvenc -preset medium -x264-params keyint=10:keyint_min=10:bframes=0 -bsf:v noise=amount='3000*not(key)' -pix_fmt yuv420p "corrupted_vid.mp4" && ffmpeg -y -i "corrupted_vid.mp4" -c:v h264_nvenc -preset medium "gl_butviewbl.mp4"
+ffmpeg  -y -i /home/ahmed/input.mp4 -c:v libx264 -x264-params keyint=10:keyint_min=10:bframes=0 -bsf:v noise=amount='3000*not(key)' -pix_fmt yuv420p "corrupted_vid.mp4" && ffmpeg -y -i "corrupted_vid.mp4" "gl_butviewbl.mp4"
+ffmpeg  -y -i /home/ahmed/input.mp4 -vf scale=64x64 -qp 40 output.mp4 && ffmpeg -y -i output.mp4 -vf scale=512x512 outputvid_res.mp4
+ffmpeg  -y -i /home/ahmed/output.mp4 -vf scale=64x64 -qp 40 output.mp4 && ffmpeg -y -i output.mp4 -vf scale=512x512 outputvid_res.mp4
+ffmpeg  -y -i inpu -vf scale=64x64 -qp 40 output.mp4 && ffmpeg -y -i output.mp4 -vf scale=512x512 outputvid_res.mp4
+/home/ahmed/.config/hypr/scripts/STEAM_BACKGROUND_RECORDING/SB_cut_vid.sh /home/ahmed/Videos/converted/recorded_20251128_123211.mp4 00:27:02 00:28:00
+/home/ahmed/.config/hypr/scripts/STEAM_BACKGROUND_RECORDING/SB_cut_vid.sh /home/ahmed/Videos/converted/recorded_20251128_123211.mp4 00:24:05 00:24:40
+mpv "/home/ahmed/Videos/converted/recorded_20251128_123211.mp4" --no-osc
+mpv "/home/ahmed/Videos/converted/recorded_20251128_123211.mp4" --chapter=1
+vlc "/home/ahmed/Videos/converted/recorded_20251128_123211.mp4"
+mpv "/home/ahmed/Videos/converted/recorded_20251128_123211.mp4" --no-audio-display
+mpv "/home/ahmed/Videos/converted/recorded_20251128_123211.mp4" --chapter-list
+ffprobe -i "/home/ahmed/Videos/converted/recorded_20251128_123211.mp4" -show_chapters
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1229490_20251128_123211/ -300 /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_122949020251128_122317.json
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1229490_20251128_123211/ -300 /run/media/ahmed/drivec/Sync_W11/Steam_rec/timelines/timeline_122949020251128_123153.json
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1229490_20251128_123211/ -300
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1229490_20251128_123211/ -300 2M
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1229490_20251023_110928/ -300 2M
+sudo pacman -S resvg
+sudo pacman -S yazi
+/home/ahmed/Pictures/jpegtest/jpg2jxl_clean.sh /home/ahmed/Cameraxio/OpenCamera/
+/home/ahmed/Pictures/jpegtest/jpg2jxl.sh /home/ahmed/Cameraxio/OpenCamera/
+/home/ahmed/Pictures/jpegtest/jpg2jxl_clean.sh /home/ahmed/Cameraxio/Restored/
+/home/ahmed/Pictures/jpegtest/jpg2jxl.sh /home/ahmed/Cameraxio/Restored/
+/home/ahmed/Pictures/jpegtest/jpg2jxl_clean.sh /home/ahmed/Pictures/Older_laptop_scrns/
+/home/ahmed/Pictures/jpegtest/jpg2jxl.sh /home/ahmed/Pictures/Older_laptop_scrns/
+/home/ahmed/Pictures/jpegtest/jpg2jxl_clean.sh /home/ahmed/Pictures/PcScreenShots/
+/home/ahmed/Pictures/jpegtest/jpg2jxl.sh /home/ahmed/Pictures/PcScreenShots/
+/home/ahmed/Pictures/jpegtest/jpg2jxl_clean.sh /home/ahmed/Pictures/Laptopscreensshots/
+/home/ahmed/Pictures/jpegtest/jpg2jxl.sh /home/ahmed/Pictures/Laptopscreensshots/
+/home/ahmed/Pictures/jpegtest/jpg2jxl_clean.sh /home/ahmed/Pictures/Scrn_Shoots_Phone/
+/home/ahmed/Pictures/jpegtest/jpg2jxl.sh /home/ahmed/Pictures/Scrn_Shoots_Phone/
+/home/ahmed/Pictures/jpegtest/jpg2jxl_clean.sh /home/ahmed/Pictures/Screenshots/
+/home/ahmed/Documents/obsi/Liuounx/sh_files/startv4_cachyos.sh {gamescope -f --} /run/media/ahmed/drivec/extrenalsyslinks/PC_GAMES/MW05/MWZ/speed.exe
+/home/ahmed/Pictures/jpegtest/jpg2jxl.sh /home/ahmed/Pictures/Screenshots/
+/home/ahmed/Pictures/jpegtest/jpg2jxl_clean.sh /home/ahmed/Cameraxio/Screenshots/
+/home/ahmed/Pictures/jpegtest/jpg2jxl.sh /home/ahmed/Cameraxio/Screenshots/
+/home/ahmed/Pictures/jpegtest/jpg2jxl_clean.sh /home/ahmed/Cameraxio/Camera/
+/home/ahmed/Pictures/jpegtest/jpg2jxl_clean.sh /home/ahmed/cameraxiojxl/
+/home/ahmed/.local/share/applications/NFSMW.desktop
+/home/ahmed/Documents/obsi/Liuounx/sh_files/startv4_cachyos.sh {gamescope -f --} /run/media/ahmed/drivec/extrenalsyslinks/PC_GAMES/NfSMW/speed.exe
+/home/ahmed/Documents/obsi/Liuounx/sh_files/startv4_cachyos.sh {gamescope -f --} /run/media/ahmed/drivec/PC_GAMES/NfSMW/speed.exe
+/home/ahmed/Pictures/jpegtest/jpg2jxl.sh /home/ahmed/cameraxiojxl/
+/home/ahmed/Pictures/jpegtest/jpg2jxl.sh /home/ahmed/Pictures/jpegtest/
+mkdir jpegtest
+mkdir
+touch jpg2jxl.sh
+cjxl --quality 100 /home/ahmed/Pictures/Screenshots/mpv-shot0012.jpg /home/ahmed/Pictures/Screenshots/output.jxl
+magick /home/ahmed/Pictures/Screenshots/mpv-shot0012.jpg output.jxl
+cjxl -q 90 -e 9 /home/ahmed/Pictures/Screenshots/mpv-shot0012.jpg output.jxl
+cjxl -h
+cjxl --lossless /home/ahmed/Pictures/Screenshots/mpv-shot0012.jpg output.jxl
+cjxl --near-lossless /home/ahmed/Pictures/Screenshots/mpv-shot0012.jpg ./output.jxl
+wev
+fastfetch
+curl -X POST http://localhost:8080/products \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "ifurit 12 Smartphone",
+    "description": "Latest ifurit smartphone",
+    "price": 699.99,
+    "stockQuantity": 15
+  }'
+curl -X POST http://localhost:8080/orders \
+  -H "Content-Type: application/json" \
+  -d '{
+    "customerName": "gyro sandstorm",
+    "customerEmail": "gyroSS@example.com",
+    "shippingAddress": "228 St, Qual, Irca",
+    "productIds": [1, 2]
+  }'
+curl -X DELETE http://localhost:8080/orders/1
+curl -X PUT http://localhost:8080/orders/1/status \
+  -H "Content-Type: application/json" \
+  -d '{"status": "SHIPPED"}'
+curl -X PUT http://localhost:8080/orders/1/status \
+  -H "Content-Type: application/json" \
+  -d '{"status": "PROCESSING"}'
+curl http://localhost:8080/orders
+curl -X POST http://localhost:8080/orders \
+  -H "Content-Type: application/json" \
+  -d '{
+    "customerName": "gyro Doe",
+    "customerEmail": "gyro@example.com",
+    "shippingAddress": "228 St, Qual, Irca",
+    "productIds": [1, 2]
+  }'
+curl http://localhost:8080/products
+/home/ahmed/Documents/obsi/Backend/compile.sh
+shutdown
+sudo pacman -R stremio
+flatpak run stremio
+flatpak install -y stremio
+stremio
+ip a | grep wlan0
+ip a | grep ip
+ip a
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_1451940_20251122_181505/
+./compile.sh
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251116_200632/
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251116_193553/
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251116_193155/
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251116_192955/
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251116_192822/
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251116_180738/
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251115_113240/
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251115_113202/
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251115_112056/
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251115_111925/
+rsync -aHL --checksum --progress /home/ahmed/linkstobackup/ /run/media/ahmed/Ahmed/extrenalsyslinks/
+zeditor /home/ahmed/.config/hypr/scripts/STEAM_BACKGROUND_RECORDING/randompvid.sh
+curl -X POST http://localhost:8080/orders \
+  -H "Content-Type: application/json" \
+  -d '{
+    "customerName": "John Doe",
+    "customerEmail": "john@example.com",
+    "shippingAddress": "123 Main St, City, Country",
+    "productIds": [1, 2]
+  }'
+curl -X POST http://localhost:8080/products \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Wireless Headphones",
+    "description": "Noise cancelling headphones",
+    "price": 199.99,
+    "stockQuantity": 15
+  }'
+curl http://localhost:8080/products/4
+curl http://localhost:8080/products/1
+/home/ahmed/Documents/obsi/C4_S1/CSCU9YW/ass/welcome-demo-workingcopy/compile.sh
+./mvnw clean package
+/home/ahmed/Documents/obsi/C4_S1/CSCU9YW/ass/welcome-demo-workingcopy/mvnw clean package
+/home/ahmed/Documents/obsi/C4_S1/CSCU9YW/ass/welcome-demo workingcopy/compile.sh
+"/home/ahmed/Documents/obsi/C4_S1/CSCU9YW/ass/welcome-demo workingcopy/compile.sh"
+java -jar ./target/welcome-demo-0.0.1-SNAPSHOT.jar
+sudo pacman -S localsend
+bto
+hyprctl reload
+/home/ahmed/.config/hypr/scripts/ytp.sh
+sudo pacman -S hyprtoolkit
+keepassxc
+sudo pacman -Syu
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251112_160745/
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251112_160418/
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251112_155351/
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251110_163025/
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251110_162742/
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251110_162220/
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251110_162111/
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251110_161735/
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251110_161542/
+/home/ahmed/.config/hypr/s.sh
+/home/ahmed/.config/hypr/compress_vidclip.sh
+/home/ahmed/.config/hypr/copy_last_video.sh
+/home/ahmed/.config/hypr/waybar/scripts/battery-state.sh
+/home/ahmed/.config/hypr/waybar/scripts/bluetooth-menu.sh
+/home/ahmed/.config/hypr/waybar/scripts/cpu-temp.sh
+/home/ahmed/.config/hypr/waybar/scripts/theme-switcher.sh
+touch /home/ahmed/.config/waybar/themes/jsonc
+mkdir -p $HOME/.config/waybar/themes/css
+/home/ahmed/.config/hypr/waybar/scripts/volume-control.sh
+/home/ahmed/.config/hypr/waybar/scripts/wifi-menu.sh
+/home/ahmed/.config/hypr/waybar/scripts/wifi-status.sh
+sudo pacman -S pamixer
+/home/ahmed/.config/hypr/waybar/scripts/mic-status.sh
+/home/ahmed/.config/hypr/waybar/scripts/audio-status.sh
+/home/ahmed/.config/hypr/scripts-master/wallpapermenu
+/home/ahmed/.config/hypr/scripts-master/dmenu_mpv
+/home/ahmed/.config/hypr/scripts-master/audio_output_switch
+/home/ahmed/.config/hypr/scripts/dont_gamemode.sh
+hyprctl --batch "\
+    # keyword animations:enabled 0;\
+    keyword windowrulev2 forcergbx, class:.*;\
+    keyword windowrulev2 opaque, class:.*;\
+    keyword decoration:shadow:enabled 0;\
+    # keyword decoration:rounding 0;\
+    keyword decoration:blur:enabled 0"
+/home/ahmed/.config/hypr/scripts/gamemode.sh
+/home/ahmed/.config/hypr/scripts/profilepowerswitch.sh
+/home/ahmed/.config/hypr/scripts/hyscrnwindow.sh
+/home/ahmed/.config/hypr/scripts/ksnip_last_five_scrns.sh
+ln -sf /home/ahmed/.config/hypr/scripts/STEAM_BACKGROUND_RECORDING/randompvid.sh /home/ahmed/.local/bin/randompvid
+ln -sf /home/ahmed/.config/hypr/scripts/STEAM_BACKGROUND_RECORDING/sb_clip_into_video.sh /home/ahmed/.local/bin/sbclip
+ln -sf /home/ahmed/.config/hypr/scripts/STEAM_BACKGROUND_RECORDING/Sb_backconvertintomp4.sh /home/ahmed/.local/bin/Sbmp4
+/home/ahmed/.config/hypr/scripts/tests/numchab.sh
+/home/ahmed/.config/hypr/rofi/scripts/bluetooth
+/home/ahmed/.config/hypr/rofi/scripts/cliphist-rofi-img
+/home/ahmed/.config/hypr/rofi/scripts/nitrosense.sh
+/home/ahmed/.config/hypr/rofi/scripts/rofi.sh
+/home/ahmed/.config/hypr/rofi/scripts/sound-input
+/home/ahmed/.config/hypr/rofi/scripts/sound-input-port.sh
+/home/ahmed/.config/hypr/rofi/scripts/sound-output
+/home/ahmed/.config/hypr/rofi/scripts/sound-output-port.sh
+/home/ahmed/.config/hypr/rofi/scripts/wifi.sh
+/home/ahmed/.config/hypr/rofi/scripts/Swtich_de.sh
+/home/ahmed/.config/hypr/rofi/scripts/power-menu
+/home/ahmed/.config/hypr/rofi/scripts/audio_Input_switch.sh
+/home/ahmed/.config/hypr/rofi/scripts/IN_OR_OUT.sh
+/home/ahmed/.config/hypr/rofi/scripts/Brightness.sh
+/home/ahmed/.config/hypr/rofi/scripts/ripgrepnotes.sh
+/home/ahmed/.config/hypr/rofi/scripts/rofi-theme-switcher.sh
+/home/ahmed/.config/hypr/rofi/scripts/roway.sh
+/home/ahmed/.config/hypr/scripts/YTP_download_video.sh
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251110_161341/
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251110_160632/
+open /home/ahmed/Videos/converted/recorded_20251018_210817.mp4
+Sbmp4 /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_2001120_20251018_210817/
+Sbmp4
+sudo micro /boot/EFI/refind/refind.conf
+ls /boot/efi/EFI/refind/
+sudo blkid
+lsblk
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_250820_20250304_221526/
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_250820_20250218_173515/
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_250820_20250218_173351/
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_1229490_20251010_211155/
+sbclip /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251104_201148/
+/home/ahmed/.config/hypr/scripts/sb_clip_into_video.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251105_191520/
+/home/ahmed/.config/hypr/scripts/Sb_backconvertintomp4.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251105_191520/
+/home/ahmed/.config/hypr/scripts/Sb_backconvertintomp4.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_581320_20251030_190532/
+/home/ahmed/.config/hypr/scripts/Sb_backconvertintomp4.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1229490_20251108_090256/ -300
+/home/ahmed/.config/hypr/scripts/Sb_backconvertintomp4.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1229490_20251108_090256/ -300 2M
+zeditor --diff /home/ahmed/.config/hypr/scripts/Sb_backconvertintomp4.sh /home/ahmed/script_20251108_224802.sh
+/home/ahmed/Videos/script_from_clipboard.sh
+mpv /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1229490_20251108_090256/session.mpd
+/home/ahmed/.config/hypr/scripts/Sb_backconvertintomp4.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1229490_20251108_114221/ -300
+zeditor --diff /home/ahmed/Videos/script_20251108_222116.sh /home/ahmed/Videos/script_20251108_222255.sh
+zeditor diff /home/ahmed/Videos/script_20251108_222116.sh /home/ahmed/Videos/script_20251108_222255.sh
+touch script_from_clipboard.sh
+#!/bin/bash
+wl-paste > new_script.sh && chmod +x new_script.sh
+/home/ahmed/.config/hypr/scripts/Sbackconvertintomp4.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1229490_20251108_114221/ -300
+/home/ahmed/.config/hypr/scripts/Sbackconvertintomp4.sh ./
+/home/ahmed/.config/hypr/scripts/Sbackconvertintomp4.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1229490_20251108_114221/ -300 2M
+/home/ahmed/.config/hypr/scripts/Sbackconvertintomp4.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/video/bg_1229490_20251108_114221/
+/home/ahmed/.config/hypr/scripts/sb_clip_into_video.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251107_084850/
+/home/ahmed/.config/hypr/scripts/sb_clip_into_video.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251107_085630/
+/home/ahmed/.config/hypr/scripts/sb_clip_into_video.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251107_090611/
+/home/ahmed/.config/hypr/scripts/sb_clip_into_video.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251107_090832/
+/home/ahmed/.config/hypr/scripts/sb_clip_into_video.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_2807960_20251107_091250/
+/home/ahmed/.config/hypr/scripts/sb_clip_into_video.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_1167630_20251012_111545/
+/home/ahmed/.config/hypr/convert_steam_clip.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_1167630_20251012_111545/
+/home/ahmed/.config/hypr/scripts/Sbackconvertintomp4.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_1167630_20251012_111545/video/bg_1167630_20251009_183812/
+/home/ahmed/.config/hypr/convert_steam_clip.sh /run/media/ahmed/drivec/Sync_W11/Steam_rec/clips/clip_1167630_20251012_111545/video/bg_1167630_20251009_183812/
+/home/ahmed/.config/hypr/convert_steam_clip.sh ./
+reboot
+sudo sbctl status
+sudo sbctl verify
+sudo sbctl-batch-sign
+sudo sbctl enroll-keys --microsoft
+sudo sbctl create-keys
+sudo sbctl sign-all
+sudo sbctl sign -s /boot/EFI/Microsoft/Boot/bootmgfw.efi
+# Export your keys
+sudo sbctl export-keys /tmp/sbctl-keys
+sudo sbctl sign -s /boot/EFI/refind/refind_x64.efi
+mokutil --sb-state
+sudo pacman -S mokutil
+sudo refind-install
+refind-install
+sbctl status
+sudo sbctl verify | sed 's/✗ /sbctl sign -s /e'
+sbctl verify | sed 's/✗ /sbctl sign -s /e'
+sbctl-batch-sign
+sudo sbctl enroll-keys
+bootctl
+systemctl reboot --firmware-setup
+yay -S sbctl
+sudo pacman -S sbctl
+mpv "https://www.youtube.com/watch?v=DVpXhNwj1HA"
+sudo pacman -S partitionmanager
+kill hypridle
+rm -rf /home/ahmed/.config/ppsspp/PSP/TEXTURES
+rm -rf /home/ahmed/.config/ppsspp/PSP/SYSTEM
+rm -rf /home/ahmed/.config/ppsspp/PSP/SAVEDATA
+rm -rf /home/ahmed/.config/ppsspp/PSP/PPSSPP_STATE
+rm -rf /home/ahmed/.config/ppsspp/PSP/PLUGINS
+rm -rf /home/ahmed/.config/ppsspp/PSP/GAME
+rm -rf /home/ahmed/.config/ppsspp/PSP/Cheats
+
+# Then create the symlinks
+ln -sf /home/ahmed/PSP/PSP/TEXTURES /home/ahmed/.config/ppsspp/PSP/
+ln -sf /home/ahmed/PSP/PSP/SYSTEM /home/ahmed/.config/ppsspp/PSP/
+ln -sf /home/ahmed/PSP/PSP/SAVEDATA /home/ahmed/.config/ppsspp/PSP/
+ln -sf /home/ahmed/PSP/PSP/PPSSPP_STATE /home/ahmed/.config/ppsspp/PSP/
+ln -sf /home/ahmed/PSP/PSP/PLUGINS /home/ahmed/.config/ppsspp/PSP/
+ln -sf /home/ahmed/PSP/PSP/GAME /home/ahmed/.config/ppsspp/PSP/
+ln -sf /home/ahmed/PSP/PSP/Cheats /home/ahmed/.config/ppsspp/PSP/
+
+ln -sf /home/ahmed/PSP/PSP/TEXTURES          /home/ahmed/.config/ppsspp/PSP/
+ln -sf /home/ahmed/PSP/PSP/SYSTEM            /home/ahmed/.config/ppsspp/PSP/
+# ln -sf /home/ahmed/PSP/PSP                 /SCREENSHOT /home/ahmed/.config/PSP/SCREENSHOT
+ln -sf /home/ahmed/PSP/PSP/SAVEDATA           /home/ahmed/.config/ppsspp/PSP
+ln -sf /home/ahmed/PSP/PSP/PPSSPP_STATE       /home/ahmed/.config/ppsspp/PSP
+ln -sf /home/ahmed/PSP/PSP/PLUGINS            /home/ahmed/.config/ppsspp/PSP
+ln -sf /home/ahmed/PSP/PSP/GAME               /home/ahmed/.config/ppsspp/PSP
+ln -sf /home/ahmed/PSP/PSP/Cheats             /home/ahmed/.config/ppsspp/PSP
+rsync -aHL --checksum --progress /home/ahmed/linkstobackup/ /run/media/ahmed/drivec/extrenalsyslinks/
+sudo pacman -S ppsspp
+echo "shutdown" | at 7:00
+/usr/lib/xdg-desktop-portal
+dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+XDG_CURRENT_DESKTOP,Hyprland
+sudo pacman -S xdg-desktop-portal-hyprland
+flatpak install -y com.obsproject.Studio com.valvesoftware.SteamLink
+flatpak install -y obsproject com.valvesoftware.SteamLink
+sudo pacman -S vesktop
+yay -S android-studio
+gamescope -S stretch -- /home/ahmed/.config/hypr/app_images/VacuumTube-x86_64.AppImage & sleep 3 && wf-recorder -g "$(slurp)" -f recording.mp4
+# Start the app
+gamescope -S stretch -- /home/ahmed/.config/hypr/app_images/VacuumTube-x86_64.AppImage &
+
+# Get detailed info about all gamescope windows
+sleep 3
+hyprctl clients | grep -A 20 -B 5 "gamescope"
+gamescope -S stretch -- /home/ahmed/.config/hypr/app_images/VacuumTube-x86_64.AppImage & sleep 3 && wf-recorder -C -f recording.mp4
+gamescope -S stretch -- /home/ahmed/.config/hypr/app_images/VacuumTube-x86_64.AppImage & sleep 3 && wf-recorder -c gamescope -t "VacuumTube" -f recording.mp4
+gamescope -S stretch -- /home/ahmed/.config/hypr/app_images/VacuumTube-x86_64.AppImage & sleep 3 && wf-recorder -t "VacuumTube" -f recording.mp4
+# Start the app first
+gamescope -S stretch -- /home/ahmed/.config/hypr/app_images/VacuumTube-x86_64.AppImage &
+
+# Wait a moment, then check windows
+sleep 2
+hyprctl clients | grep "class:\|title:"
+gamescope -S stretch -- /home/ahmed/.config/hypr/app_images/VacuumTube-x86_64.AppImage & sleep 3 && wf-recorder -c gamescope -f recording.mp4
+hyprctl clients | grep -A 10 -B 5 gamescope
+gamescope -S stretch -- /home/ahmed/.config/hypr/app_images/VacuumTube-x86_64.AppImage &
+
+# Then list windows to find the correct class
+hyprctl clients | grep -A 5 -B 5 vacuum
+man wf-recorder
+hyprctl clients
+gamescope -S stretch -- /home/ahmed/.config/hypr/app_images/VacuumTube-x86_64.AppImage &
+# Then record using window class
+wf-recorder -c VacuumTube -f recording.mp4
+gamescope -S -f stretch -- /home/ahmed/.config/hypr/app_images/VacuumTube-x86_64.AppImage &
+# Then record using window class
+wf-recorder -c VacuumTube -f recording.mp4
+wf-recorder -C -f output.mp4
+wf-recorder -x VacuumTube-x86_64.AppImage -f output.mp4
+wf-recorder -c VacuumTube -f output.mp4
+wf-recorder -c VacuumTube -f recording.mp4
+gamescope -S stretch -- /home/ahmed/.config/hypr/app_images/VacuumTube-x86_64.AppImage &
+gamescope -S -f stretch -- /home/ahmed/.config/hypr/app_images/VacuumTube-x86_64.AppImage &
+sudo pacman -S wf-recorder
+/home/ahmed/.config/hypr/Backup_restore_v1_test.sh
+cat filename.txt
+printf "Line 1\nLine 2\nLine 3\n" > filename.txt
+sudo pacman -S nvidia-dkms
+sudo pacman -S nvidiadkms
+sudo pacman -S nividadkms
+touch myfile.txt
+echo "Hello World" > myfile.txt
+echo "Second line" >> myfile.txt
+systemctl --user start sunshine
+sudo micro /etc/sddm.conf
+cat /etc/sddm.conf
+systemctl --user stop sunshine
+systemctl --user enable sunshine
+ls -la /usr/share/wayland-sessions/hyprland.desktop
+systemctl --user stop sunshine
+systemctl --user disable sunshine
+micro /etc/sddm.conf
+ls /usr/share/wayland-sessions/
+ls /usr/share/xsessions/
+hyprland
+alacritty
+# Check Sunshine config file
+cat ~/.config/sunshine/sunshine.conf
+sudo ufw status numbered
+# Remove ALL existing rules to start fresh
+sudo ufw --force reset
+
+# Re-enable UFW with default deny policy
+sudo ufw enable
+
+# Add the complete Sunshine range for both TCP and UDP
+sudo ufw allow 47984:48100/tcp
+sudo ufw allow 47984:48100/udp
+# Remove IPv6 individual TCP rules
+sudo ufw delete 12
+sudo ufw delete 13
+sudo ufw delete 14
+
+# Remove IPv6 individual UDP rules
+sudo ufw delete 15
+sudo ufw delete 16
+sudo ufw delete 17
+
+# Remove IPv6 old range rules
+sudo ufw delete 18
+sudo ufw delete 19
+sudo ufw delete 20
+# Remove the remaining individual TCP rules
+sudo ufw delete 1
+sudo ufw delete 2
+sudo ufw delete 3
+
+# Remove the remaining individual UDP rules  
+sudo ufw delete 4
+sudo ufw delete 5
+sudo ufw delete 6
+
+# Remove the old range rules that are now redundant
+sudo ufw delete 7
+sudo ufw delete 8
+sudo ufw delete 9
+# Add clean range covering all Sunshine needs (with buffer)
+sudo ufw allow 47984:48100/tcp
+sudo ufw allow 47984:48100/udp
+sudo ufw delete 19
+sudo ufw delete 20
+sudo ufw delete 21
+sudo ufw delete 22
+sudo ufw delete 23
+sudo ufw delete 24
+sudo ufw delete 25
+sudo ufw delete 26
+sudo ufw delete 27
+sudo ufw delete 28
+sudo ufw delete 29
+sudo ufw delete 30
+sudo ufw delete 31
+sudo ufw delete 32
+sudo ufw delete 33
+sudo ufw delete 34
+sudo ufw delete 35
+sudo ufw delete 36
+# Remove all the individual port rules and overlapping ranges
+sudo ufw delete 1
+sudo ufw delete 2
+sudo ufw delete 3
+sudo ufw delete 4
+sudo ufw delete 5
+sudo ufw delete 6
+sudo ufw delete 7
+sudo ufw delete 8
+sudo ufw delete 9
+sudo ufw delete 10
+sudo ufw delete 11
+sudo ufw delete 12
+sudo ufw delete 13
+sudo ufw delete 14
+sudo ufw delete 15
+sudo ufw delete 16
+sudo ufw delete 17
+sudo ufw delete 18
+sudo ss -tlnup | grep sunshine
+# Extend the range to include a few more ports
+sudo ufw allow 47984:48020/tcp
+sudo ufw allow 47984:48020/udp
+sudo ufw allow 47984:48010/tcp
+sudo ufw allow 47984:48010/udp
+sudo ufw allow 35043/tcp
+sudo ufw allow 35043/udp
+# Open the complete Sunshine port range (TCP and UDP)
+sudo ufw allow 47984:48010/tcp
+sudo ufw allow 47984:48010/udp
+sudo ufw enable
+sudo ufw disable
+# Remove any existing Sunshine rules to start fresh
+sudo ufw delete allow 47990/tcp
+sudo ufw delete allow 47999/tcp
+sudo ufw delete allow 48010/tcp
+sudo ufw delete allow 47998/udp
+sudo ufw delete allow 47999/udp
+sudo ufw delete allow 48000/udp
+sudo ufw delete allow 48010/udp
+
+# Add the complete range Sunshine needs
+sudo ufw allow 47984:48010/tcp
+sudo ufw allow 47984:48010/udp
+ss -tlnup | grep 48010
+sudo ufw status numbered | grep 48010
+# Open the complete Sunshine port range
+sudo ufw allow 47984:48010/tcp
+sudo ufw allow 47984:48010/udp
+sudo ufw allow 47984/tcp
+sudo ufw allow 47985/tcp
+sudo ufw allow 47986/tcp
+sudo ufw allow 47987/tcp
+sudo ufw allow 47988/tcp
+sudo ufw allow 47989/tcp
+
+# Also open the UDP variants for better performance
+sudo ufw allow 47984/udp
+sudo ufw allow 47985/udp
+sudo ufw allow 47986/udp
+sudo ufw allow 47987/udp
+sudo ufw allow 47988/udp
+sudo ufw allow 47989/udp
+
+# Verify all ports are open
+sudo ufw status
+micro ~/.config/sunshine/sunshine.conf
+# Sunshine web interface and streaming
+sudo ufw allow 47990/tcp
+# Audio streaming
+sudo ufw allow 47999/tcp
+# Control streaming
+sudo ufw allow 48010/tcp
+# Optional: UDP ports for better performance
+sudo ufw allow 47998/udp
+sudo ufw allow 47999/udp
+sudo ufw allow 48000/udp
+sudo ufw allow 48010/udp
+sudo ufw status verbose
+systemctl --user daemon-reload
+systemctl --user start sunshine
+systemctl --user daemon-reload
+systemctl --user enable sunshine
+sudo systemctl start sunshine
+systemctl status sunshine
+ss -tlnp | grep 47990
+sudo netstat -tlnp | grep 47990
+sudo netstat -tlnp | grep 47990
+# or
+ss -tlnp | grep 47990
+echo "notify-send "asd"" | at now + 1 minute
+man at
+notify-send asd
+sudo systemctl start atd
+sudo systemctl enable atd
+systemctl status atd
+sudo pacman -S at
+yay -S atd
+sudo pacman -S atd
+/home/ahmed/Documents/obsi/Liuounx/links.sh
+grep -o 'path="[^"]*"' /home/ahmed/.local/state/syncthing/config.xml | sed 's/path="//g' | sed 's/"//g'
+/home/ahmed/Documents/obsi/Liuounx/desktop_shortcuts/Obsidian.desktop
+cp /run/media/ahmed/drivec/PC_GAMES/GTASADEClassic/GTASA.png /home/ahmed/.config/hypr/app_images/Icons/GTASA.png
+cp /run/media/ahmed/drivec/PC_GAMES/NfSCarbono/NFS_icon.ico /home/ahmed/.config/hypr/app_images/Icons/NFSMWC.ico
+cp /run/media/ahmed/drivec/PC_GAMES/NfSCarbono/NFS_icon.ico /run/media/ahmed/drivec/PC_GAMES/NfSCarbono/NFSC_icon.ico
+cp /run/media/ahmed/drivec/PC_GAMES/NfSMW/NFSMW_icon.ico /home/ahmed/.config/hypr/app_images/Icons/NFSMW.ico
+cp /home/ahmed/Pictures/Screenshots/Kesomannen-GaleModManager-1.8.6.png.256x256_q95_crop.png /home/ahmed/.config/hypr/app_images/Icons/gale.png
+cp /home/ahmed/Pictures/Screenshots/minecrafticon5547-256x256x32.png /home/ahmed/.config/hypr/app_images/Icons/minecrafticon.png
+cp /run/media/ahmed/drivec/PC_GAMES/GTAIVTCEwZc/iv.png /home/ahmed/.config/hypr/app_images/Icons/iv.png
+gamescope -S -f stretch -- /home/ahmed/.config/hypr/app_images/VacuumTube-x86_64.AppImage
+./desktop_apps.sh
+ln -sf /home/ahmed/.config/hypr/dolphinrc /home/ahmed/.config/dolphinrc
+man ln
+ln -sf /home/ahmed/.config/hypr/.local/share/kxmlgui5/dolphin/dolphinui.rc /home/ahmed/.local/share/kxmlgui5/dolphin/dolphinui.rc
+cd ~/.local/share/
+sudo pacman -S wtype
+/home/ahmed/.config/hypr/scripts/right_click.sh
+flatpak remove org.gaphor.Gaphor
+flatpak install flathub org.gaphor.Gaphor
+flatpak install Keypunch
+flatpak install dev.bragefuglseth.Keypunch.flatpakref
+micro ~/.config/menus/applications.menu
+systemctl --user daemon-reload
+systemctl --user restart sunshine
+micro ~/.config/systemd/user/sunshine.service
+pacman -Qqe
+chmod -x /home/ahmed/.config/hypr/scripts/randompvid.sh
+/home/ahmed/.config/hypr/scripts/randompvid.sh
+chmod -x ./*
+ln -s /home/ahmed/.config/hypr/scripts/randompvid.sh /home/ahmed/.local/bin/randompvid
+touch randompvid.sh
+./random_vidlapt.sh
+zeditor /home/ahmed/.local/state/syncthing/config.xml
+sudo pacman -S hyprshot
+git clone https://github.com/ldo/blender_pycollada_importexport.git
+cd ~/.config/systemd/user/
+sudo pacman -S sunshine
+man cp
+flatpak install flathub io.github.wivrn.wivrn
+nm-applet
+yay -S network-manager-applet
+yay -S nm-applet
+flatpak install nm-applet
+sudo pacman -S nm-applet
+systemctl status NetworkManager
+touch syncthing@.service
+dump_vdf.py /home/ahmed/.steam/steam/userdata/418183881/config/shortcuts.vdf /home/ahmed/.steam/steam/userdata/418183881/config/shortcuts.xml
+sudo pacman -S python-vdf
+/home/ahmed/.config/hypr/app_images/pcsx2-v2.4.0-linux-appimage-x64-Qt.AppImage
+touch mount-internal-drives.service
+mkdir -p ./etc/systemd/system/
+gamescope -S stretch -- /home/ahmed/Downloads/Obsidian-1.9.14.AppImage
+yay -S mpvpaper
+sudo pacman -S mpvpaper
+/home/ahmed/Documents/obsi/Liuounx/sh_files/startv4_cachyos.sh {gamescope -f --} /run/media/ahmed/drivec/PC_GAMES/NfSCarbono/bootstrapper.exe
+zeditor /etc/systemd/system/mount-drives.service
+sudo micro /etc/systemd/system/mount-drives.service
+systemctl status mount-drives.service
+sudo systemctl daemon-reload
+sudo systemctl enable --now mount-drives.service  # Replace $USER with your username
+sudo /home/ahmed/.config/hypr/mount_drives.sh
+systemctl --user daemon-reload
+systemctl --user disable mount-drives.service
+systemctl --user daemon-reload
+systemctl --user enable --now mount-drives.service
+systemctl --user status mount-drives.service
+zeditor ~/.config/systemd/user/mount-drives.service
+zeditor nano ~/.config/systemd/user/mount-drives.service
+mkdir -p ~/.config/systemd/user/
+sudo systemctl daemon-reload
+sudo systemctl disable mount-drives.service  # Replace $USER with your username
+sudo zeditor /etc/systemd/system/mount-drives.service
+sudo micro /etc/systemd/system/syncthing@.service
+sudo systemctl daemon-reload
+sudo systemctl enable --now syncthing@$USER  # Replace $USER with your username
+sudo ./installer.sh
+yay -S qdirstat
+sudo pacman -S qdirstat
+/home/ahmed/.local/share/applications/NFSCO.desktop
+/home/ahmed/.local/share/applications/GTASA.desktop
+yay -S kew
+yay -S gpu-screen-recorder-ui
+gpu-screen-recorder
+yay -S gpu-screen-recorder
+sudo pacman -S yay
+/home/ahmed/Downloads/Gale_1.9.5_amd64.AppImage
+"/usr/bin/prismlauncher" '--launch' 'Minecraftso(1)'
+prismlauncher --launch Minecraftso
+ln -s /home/ahmed/.config/hypr/mpv /home/ahmed/.config/mpv
+sudo pacman -S udiskie
+sudo pacman -S cliphist
+mkdir -p ~/.local/bin
+zeditor /home/ahmed/.config/hypr/
+flatpak install com.discordapp.Discord
+flatpak
+sudo pacman -S archlinux-xdg-menu
+grep "path=" /home/ahmed/.local/state/syncthing/config.xml > ~/Documents/obsi/Liuounx/Syncthing_bp_pc.txt
+grep "path=" /home/ahmed/.local/state/syncthing/config.xml > ~/syncthing.txt
+grep "path=" /home/ahmed/.local/state/syncthing/config.xml
+zeditor /home/ahmed/.config/hypr/hyprland.conf
+grep "LaunchOptions" /home/ahmed/.local/share/Steam/userdata/418183881/config/localconfig.vdf > ~/steam_launch_options_backup.txt
+gamescope --help
+gamescope
+sudo mount -t ntfs-3g -o uid=1000,gid=1000,umask=022 UUID=0E7D841F7183877B /run/media/ahmed/kabash
+sudo pacman -S ntfs-3g
+sudo pacman -S zed
+syncthing
+ln -s /home/ahmed/.config/hypr/waybar /home/ahmed/.config/waybar
+ln -s /home/ahmed/.config/hypr/rofi /home/ahmed/.config/rofi
+rofi
+sudo pacman -S hyprland hypridle hyprlock f3d flatpak gamemode godot hyprpolkitagent hyprshot keepassxc ksnip lmms prismlauncher protonup-qt rofi swaync syncthing swaybg tree waybar wev yt-dlp
+sudo pacman -S hyprland hypridle hyprlock btop f3d flatpak gamemode godot hyprpolkitagent hyprshotkeepassxc kew ksnip lmms pavucontrol prismlauncher protontricks protonup-qt qdirstat rofi swaync syncthing swaybg tree waybar wev yt-dlp

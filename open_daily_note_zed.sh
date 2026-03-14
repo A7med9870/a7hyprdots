@@ -8,7 +8,7 @@ MONTH=$(date +%b | tr '[:upper:]' '[:lower:]')  # e.g., nov
 YEAR=$(date +%Y)                               # e.g., 2024
 
 # Define the directory path dynamically
-DIR="/home/ahmed/Documents/obsi/Daily Notes/${YEAR}/${MONTH}/"
+DIR="/home/$USER/Documents/obsi/Daily Notes/${YEAR}/${MONTH}/"
 echo "Directory: $DIR"
 
 # Ensure the directory exists

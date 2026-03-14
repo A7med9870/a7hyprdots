@@ -94,7 +94,8 @@ while true; do
   menu_list=$(printf "%b" "$menu_list" | sed '/^[[:space:]]*$/d')
 
   # Display the menu using rofi.
-  chosen=$(printf "%b" "$menu_list" | rofi -theme-str 'configuration { show-icons: false; } window { location: north east; x-offset: -155; y-offset: 2; width: 225px; } listview { columns: 1; lines: 50; } inputbar { enabled: false; } mode-switcher { enabled: false; }' -dmenu -i)
+  # chosen=$(printf "%b" "$menu_list" | rofi -theme-str 'configuration { show-icons: false; } window { location: north east; x-offset: -155; y-offset: 2; width: 225px; } listview { columns: 1; lines: 50; } inputbar { enabled: false; } mode-switcher { enabled: false; }' -dmenu -i)
+  chosen=$(printf "%b" "$menu_list" | rofi -theme-str 'configuration { show-icons: false; } window { x-offset: -155; y-offset: 2; width: 225px; } listview { columns: 1; lines: 50; } inputbar { enabled: false; } mode-switcher { enabled: false; }' -dmenu -i)
 
   # If no selection is made, exit.
   [ -z "$chosen" ] && break
