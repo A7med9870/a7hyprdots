@@ -1,0 +1,6 @@
+.stfolder/
+My_wallpapers/*.jxl
+My_wallpapers/*.mp4
+app_images/
+rofi/scripts/obsidian-rofi-helper/
+scripts/dejsonlz4/
