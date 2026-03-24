@@ -32,6 +32,10 @@ fi
 
 # Convert all JPEG, PNG, and WebP files in the directory
 find "$target_dir" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) | while read -r file; do
+    if [ -f "$output_file" ]; then
+        echo "  Skipping: ${name_no_ext}.jxl already exists"
+        continue
+    fi
     filename=$(basename "$file")
     name_no_ext="${filename%.*}"
     output_file="$target_dir/${name_no_ext}.jxl"

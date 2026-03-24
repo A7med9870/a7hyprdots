@@ -125,7 +125,7 @@
   <Action name="compact" priority="0"/>
   <Action name="details" priority="0"/>
   <Action name="edit_copy" priority="0"/>
-  <Action name="edit_cut" priority="0"/>
+  <Action name="edit_cut" priority="0" shortcut="Ctrl+X"/>
   <Action name="edit_paste" priority="0"/>
   <Action name="go_back" priority="0"/>
   <Action name="go_forward" priority="0"/>
@@ -144,5 +144,9 @@
   <Action name="view_zoom_in" priority="0"/>
   <Action name="view_zoom_out" priority="0"/>
   <Action name="view_zoom_reset" priority="0"/>
+  <Action name="show_size" shortcut=""/>
+  <Action name="show_modificationtime" shortcut=""/>
+  <Action name="sort_by_size" shortcut="Ctrl+."/>
+  <Action name="sort_by_modificationtime" shortcut="Ctrl+,"/>
  </ActionProperties>
 </gui>

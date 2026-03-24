@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# ffmpegmp4intomp3 - Extract audio from MP4 to MP3 with metadata preservation
+# ffmpegmp4intomp3 - Extract audio from MP4 to MP3 with metadata and cover art
 
 if [ $# -eq 0 ]; then
     echo "Usage: ffmpegmp4intomp3 /path/to/video.mp4"
-    echo "Extracts audio to MP3 while preserving metadata"
+    echo "Extracts audio to MP3 while preserving metadata and cover art"
     exit 1
 fi
 
@@ -24,6 +24,9 @@ filename_noext="${filename%.*}"
 output_dir=$(dirname "$input_file")
 output_file="$output_dir/$filename_noext.mp3"
 
+# Temporary file for cover art
+temp_cover="/tmp/${filename_noext}_cover.jpg"
+
 # Store original timestamps
 original_mtime=$(stat -c %Y "$input_file")
 original_atime=$(stat -c %X "$input_file")
@@ -31,26 +34,51 @@ original_atime=$(stat -c %X "$input_file")
 echo "Extracting audio from: $filename"
 echo "Output: $output_file"
 
-# Extract audio with metadata preservation
-ffmpeg -i "$input_file" -i "$image_file" \
-    -map 0:a:0 -map 1:0 \
-    -c:a libmp3lame -q:a 2 \
-    -c:v copy \
-    -map_metadata 0 \
-    -id3v2_version 3 \
-    -write_id3v1 1 \
-    -metadata:s:a:0 "encoder=ffmpegmp4intomp3" \
-    -metadata:s:v title="Album cover" \
-    -metadata:s:v comment="Cover (front)" \
-    "$output_file"
-# ffmpeg -i "$input_file" \
-#     -map 0:a:0 \
-#     -c:a libmp3lame -q:a 2 \
-#     -map_metadata 0 \
-#     -id3v2_version 3 \
-#     -write_id3v1 1 \
-#     -metadata:s:a:0 "encoder=ffmpegmp4intomp3" \
-#     "$output_file"
+# Check if video has an attached picture (cover art)
+ffprobe -v error -select_streams v:1 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$input_file" | grep -q "mjpeg\|png\|jpeg"
+
+if [ $? -eq 0 ]; then
+    echo "Cover art found! Extracting and embedding..."
+
+    # Extract the cover art
+    ffmpeg -i "$input_file" -map 0:v:1 -vcodec copy -y "$temp_cover" 2>/dev/null
+
+    if [ -f "$temp_cover" ]; then
+        # Extract audio and embed cover art
+        ffmpeg -i "$input_file" -i "$temp_cover" \
+            -map 0:a:0 -map 1:v:0 \
+            -c:a libmp3lame -q:a 2 \
+            -id3v2_version 3 \
+            -write_id3v1 1 \
+            -metadata:s:v title="Album cover" \
+            -metadata:s:v comment="Cover (front)" \
+            -map_metadata 0 \
+            "$output_file"
+
+        # Clean up temp file
+        rm -f "$temp_cover"
+    else
+        echo "Warning: Could not extract cover art, continuing without it..."
+        # Fall back to audio-only extraction
+        ffmpeg -i "$input_file" \
+            -map 0:a:0 \
+            -c:a libmp3lame -q:a 2 \
+            -map_metadata 0 \
+            -id3v2_version 3 \
+            -write_id3v1 1 \
+            "$output_file"
+    fi
+else
+    echo "No cover art found, extracting audio only..."
+    # No cover art found, simple audio extraction
+    ffmpeg -i "$input_file" \
+        -map 0:a:0 \
+        -c:a libmp3lame -q:a 2 \
+        -map_metadata 0 \
+        -id3v2_version 3 \
+        -write_id3v1 1 \
+        "$output_file"
+fi
 
 if [ $? -eq 0 ]; then
     echo "Conversion successful: $output_file"
@@ -60,7 +88,7 @@ if [ $? -eq 0 ]; then
     touch -m -d "@$original_mtime" "$output_file"
 
     # Also copy the file permissions
-    chmod --reference="$input_file" "$output_file"
+    chmod --reference="$input_file" "$output_file" 2>/dev/null || chmod 644 "$output_file"
 
     echo "Timestamps and permissions restored"
 else

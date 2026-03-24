@@ -1,7 +1,7 @@
 #!/bin/bash
 mkdir -p ~/.local/share/applicationsD/
 for file in ~/Documents/obsi/Liuounx/desktop_shortcuts/*.desktop; do
-    ln -sf "$file" ~/.local/share/applicationsD/
+    ln -sf "$file" ~/.local/share/applications/
 done
 # mkdir -p ~/.local/share/applications/
 # ln -sf $HOME/Documents/obsi/Liuounx/desktop_shortcuts/Obsidian_appimage.desktop    ~/.local/share/applications/Obsidian_appimage.desktop

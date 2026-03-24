@@ -4,6 +4,7 @@
 DIRS=(
     "/home/ahmed/Pictures/Linuxpc_scrn/"
     "/home/ahmed/Pictures/Laptopscreensshots"
+    "/home/ahmed/Pictures/Screenshots"
     "/home/ahmed/Pictures/Scrn_Shoots_Phone"
     "/home/ahmed/Pictures/Older_laptop_scrns"
     "/home/ahmed/Pictures/PcScreenShots"
