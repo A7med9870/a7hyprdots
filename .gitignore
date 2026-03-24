@@ -1,4 +1,5 @@
 .stfolder/
+.stfolder/*.txt
 My_wallpapers/*.jxl
 My_wallpapers/*.mp4
 app_images/
