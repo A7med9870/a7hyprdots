@@ -10,11 +10,18 @@ https://github.com/alrocar/sh1t
 more, but currently undocumented
 
 Please note that a fair share of the scripts are vibe coded/ AI gen, from deepseek
-reading a script before running it is advised
+reading any of the scripts before running it is advised
+they aren't yet to have comments that explain the way they are or why; and some will need changes to run in your machine
 
-Notable scripts are
+since they are scripts i use, expect them to be messy, really messy; since they are just left out there, might help someone someday, instead of rotting on my drives
+alongside their names, not always accurate to what they actually do
+
+Some notable scripts are
 -steam background recording converting
 -rofi menu to run yt-dlp
+- download video from clipboard link
+- download audio from clipboard link
+- download media thumbnail from clipboard link
 -rofi script to select what background you want to run (MP4 videos or jxl images)
 
 
