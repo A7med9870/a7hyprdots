@@ -10,7 +10,7 @@ files=(
     ~/.config/hypr/hyprlock.conf
     ~/.config/hypr/wallpaper_1.sh
     ~/.config/hypr/copy_last_screenshot.sh
-    ~/.config/hypr/open_daily_note.sh
+    ~/.config/hypr/obsish/open_daily_note.sh
     ~/.config/hypr/s.sh
     ~/.config/hypr/movedown.sh
     ~/.config/hypr/moveright.sh

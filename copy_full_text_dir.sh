@@ -104,7 +104,7 @@ process_directory() {
 
 # Process all text files in the hypr directory and subdirectories
 process_directory "~/.config/hypr/"
-process_directory "~/.config/steam-rom-manager/"
+# process_directory "~/.config/steam-rom-manager/"
 process_directory "~/Documents/obsi/Liuounx/insurgencysever_randommapconcpet/"
 
 echo "File content has been copied to $output_file" && notify-send "${current_date}.md updated in obsi"

@@ -16,11 +16,11 @@ newnote() {
 }
 
 Todays_note() {
-    alacritty -e /home/ahmed/.config/hypr/open_daily_note.sh
+    alacritty -e $HOME/.config/hypr/obsish/open_daily_note.sh
 }
 
 Find_in_Text() {
-    /home/ahmed/.config/hypr/rofi/scripts/ripgrepnotes.sh
+    $HOME/.config/hypr/rofi/scripts/ripgrepnotes.sh
 }
 
 selected() {

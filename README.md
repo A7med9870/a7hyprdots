@@ -23,6 +23,8 @@ Some notable scripts are
 - download audio from clipboard link
 - download media thumbnail from clipboard link
 -rofi script to select what background you want to run (MP4 videos or jxl images)
+-Script to comprass a video (for nvidia cards), to send it through discord, with another version that does for an entire folder
+[[scripts/compress_videos_nvidia.sh]]
 
 
 Keybinds image goes here :P
